@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  users_db:
+    image: "postgres:14-alpine"
+    container_name: users-ms-db
+    ports:
+      - "5438:5432"
+    volumes:
+      - users-ms-data:/var/lib/postgresql/data
+    env_file:
+      - ./env/postgres.env
+    networks:
+      - users
+
+networks:
+  users:
+    name: users
+
+volumes:
+  users-ms-data:
