@@ -40,5 +40,5 @@ app.add_middleware(
 
 
 @app.get("/")
-def main():
+def root():
     return {"status": "ok"}

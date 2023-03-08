@@ -1,14 +1,33 @@
 version: "3.9"
+
 services:
-  users_db:
+
+  users-db:
     image: "postgres:14-alpine"
     container_name: users-ms-db
     ports:
-      - "5438:5432"
+      - "5439:5432"
     volumes:
-      - users-ms-data:/var/lib/postgresql/data
+      - users-ms-data:/var/lib/postgresql/data/
     env_file:
       - ./env/postgres.env
+    networks:
+      - users
+
+  users-api:
+    build: .
+    container_name: users-ms-api
+    volumes:
+      - ./app/:/microservice/app/
+      - ./migrations/:/microservice/migrations/
+    ports:
+      - 8001:8000
+#    command: |
+#      bash -c 'while !</dev/tcp/db/5439; do sleep 1; done; uvicorn app.web.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'
+    env_file:
+      - ./env/api.env
+    depends_on:
+      - users-db
     networks:
       - users
 

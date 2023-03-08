@@ -31,14 +31,6 @@ class GlobalConfig(BaseSettings):
     DB_ECHO_LOG: bool = False
 
     @property
-    def async_database_dsn(self) -> Optional[str]:
-        return (
-            self.DATABASE_DSN.replace("postgresql://", "postgresql+asyncpg://")
-            if self.DATABASE_DSN
-            else self.DATABASE_DSN
-        )
-
-    @property
     def psycopg2_database_dsn(self) -> Optional[str]:
         return (
             self.DATABASE_DSN.replace("postgresql://", "postgresql+psycopg2://")
@@ -64,6 +56,12 @@ class TestConfig(GlobalConfig):
 
     DEBUG: bool = False
     ENVIRONMENT: EnvironmentEnum = EnvironmentEnum.TEST
+
+    @property
+    def psycopg2_database_dsn(self) -> Optional[str]:
+        # adds "_test" to DB name, if "DATABASE_DSN" is set
+        parent_db_dsn = GlobalConfig.psycopg2_database_dsn.fget(self)
+        return parent_db_dsn and parent_db_dsn + "_test"
 
 
 class ProdConfig(GlobalConfig):

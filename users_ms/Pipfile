@@ -16,6 +16,8 @@ cryptography = "*"
 python-jose = {extras = ["cryptography"], version = "*"}
 passlib = {extras = ["bcrypt"], version = "*"}
 python-multipart = "*"
+pytest = "*"
+httpx = "*"
 
 [dev-packages]
 pytest = "*"
