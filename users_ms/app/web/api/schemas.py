@@ -1,7 +1,6 @@
 from uuid import UUID
 
-from email_validator import validate_email as validate_eml, EmailNotValidError
-from pydantic import BaseModel, Extra, validator, root_validator
+from pydantic import BaseModel, EmailStr, Extra, validator, root_validator
 
 
 class Token(BaseModel):
@@ -13,23 +12,9 @@ class TokenData(BaseModel):
     username: str | None = None
 
 
-class EmailField(str):
-    @classmethod
-    def __get_validators__(cls):
-        yield cls.validate
-
-    @classmethod
-    def validate(cls, v) -> str:
-        try:
-            validate_eml(v)
-            return v
-        except EmailNotValidError:
-            raise ValueError("Email is not valid.")
-
-
 class BaseUserSchema(BaseModel):
     username: str
-    email: EmailField
+    email: EmailStr
 
     # class Config:
     #     extra = Extra.forbid

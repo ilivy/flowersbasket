@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from starlette import status
-from starlette.requests import Request
 
 from app.repository.users_repository import UsersRepository
 from app.repository.unit_of_work import UnitOfWork
@@ -10,13 +9,13 @@ from app.users_service.users import User
 from app.web.api.schemas import UserRegisterInSchema, UserOutSchema, Token
 from app.web.api.auth import authenticate_user, issue_new_token, get_current_user
 
-router = APIRouter(tags=["Auth"])
+router = APIRouter(tags=["auth"])
 
 
 @router.post(
     "/register", status_code=status.HTTP_201_CREATED, response_model=UserOutSchema
 )
-async def register(_: Request, payload: UserRegisterInSchema):
+async def register(payload: UserRegisterInSchema):
     with UnitOfWork() as unit_of_work:
         repo = UsersRepository(unit_of_work.session)
         users_service = UsersService(repo)
