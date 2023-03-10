@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from jose import JWSError, jwt
+from jose import JWSError, jwt, ExpiredSignatureError
 from passlib.context import CryptContext
 
 from app.config import settings
@@ -72,7 +72,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
         if username is None:
             raise credentials_exception
         token_data = TokenData(username=username)
-    except JWSError:
+    except (JWSError, ExpiredSignatureError):
         raise credentials_exception
     with UnitOfWork() as unit_of_work:
         repo = UsersRepository(unit_of_work.session)

@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+
+  orders-db:
+    image: "postgres:14-alpine"
+    container_name: orders-ms-db
+    ports:
+      - "54391:5432"
+    volumes:
+      - orders-ms-data:/var/lib/postgresql/data/
+    env_file:
+      - ./env/postgres.env
+    networks:
+      - orders
+
+  orders-api:
+    build: .
+    container_name: orders-ms-api
+    volumes:
+      - ./app/:/microservice/app/
+      - ./migrations/:/microservice/migrations/
+    ports:
+      - 8003:8000
+    env_file:
+      - ./env/api.env
+    depends_on:
+      - orders-db
+    networks:
+      - orders
+      - users
+
+networks:
+  orders:
+  users:
+    external:
+      name: users
+
+volumes:
+  orders-ms-data:

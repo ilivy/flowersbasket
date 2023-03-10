@@ -16,14 +16,14 @@ class EnvironmentEnum(str, Enum):
 
 
 class GlobalConfig(BaseSettings):
-    TITLE: str = "Flowers Basket - Users"
-    DESCRIPTION: str = "Users microservice"
+    TITLE: str = "Flowers Basket - Orders"
+    DESCRIPTION: str = "Orders microservice"
 
     ENVIRONMENT: EnvironmentEnum
     DEBUG: bool = False
     TIMEZONE: str = "UTC"
 
-    JWT_SECRET: str = "jwtsecret"
+    USERS_MS_URL = "http://users"
 
     DATABASE_DSN: Optional[
         PostgresDsn
