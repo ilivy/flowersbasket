@@ -1,6 +1,4 @@
-# "Flowers Basket" project
-
-Consists of several microservices:
+# "Flowers Basket" microservices
 
 * "Users" - Identity Provider (REST API)
 * "Products" - Products management domain (GraphQL)
