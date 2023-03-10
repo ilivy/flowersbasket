@@ -53,13 +53,6 @@ class OrderOutSchema(OrderBaseSchema):
         orm_mode = True
 
 
-class OrdersOutSchema(BaseModel):
-    orders: List[OrderOutSchema]
-
-    # class Config:
-    #     extra = Extra.forbid
-
-
 class UserSchema(BaseModel):
     id: UUID
     username: str
