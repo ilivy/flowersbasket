@@ -1,16 +1,17 @@
-# GraphQL API implemented on Python
+## GraphQL API implemented on Python
 
-Ariadne
+Runs **Ariadne** server with a help of uvicorn.
+**MongoDB** is used as a data storage.
 
-run the Ariadne server with the help of uvicorn
+### Run project
+`docker-compose up -d`
 
-## Fake server
+### Fake server to investigate the GraphQL schema
 `http://127.0.0.1:9002/voyager`
+
 `http://127.0.0.1:9002/graphql`
+
 `http://127.0.0.1:9002/editor/`
 
 
-## Products Mongo DB
-`docker exec -ti <ContainerID> bash`
-`mongosh`
 
