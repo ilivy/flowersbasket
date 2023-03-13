@@ -1,11 +1,11 @@
-# "Users" microservice
+# "Orders" microservice
 
 A part of "Flowers Basket" project
 ## Run project
 `docker-compose up -d`
 
 ## Run tests
-`docker-compose exec -e ENVIRONMENT=test users-api pytest`
+`docker-compose exec -e ENVIRONMENT=test orders-api pytest`
 
 
 ## Generate migrations

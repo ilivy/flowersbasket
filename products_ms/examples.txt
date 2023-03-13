@@ -1,0 +1,150 @@
+mutation {
+  addSupplier(name: "Wide Field", input: {
+    email: "wide@field.com"
+  }) {
+    ...on Supplier {
+      _id,
+      name,
+      email,
+    }
+  }
+}
+
+---------------------------------
+
+query {
+  allSuppliers {
+    _id,
+    name,
+    email,
+    flowers {
+      name
+    }
+  }
+}
+
+---------------------------------
+mutation {
+  addFlower(
+    name: "White Rose",
+    input:{
+      supplier: "ccfb3ec7-12c5-452b-9dd5-f22b3feddeac",
+      stock: {
+        quantity: 5000,
+        unit: ITEM
+      }
+    }) {
+    ...on Flower {
+      name,
+      _id
+    }
+  }
+}
+---------------------------------
+{
+  allFlowers {
+    _id,
+    name,
+    updatedAt,
+    products {
+      ...on ProductInterface {
+        name
+      }
+    },
+    description,
+    supplier {name, email}
+  }
+}
+---------------------------------
+mutation {
+  addProduct(
+    name: "Yellow Cloud",
+    type: basket,
+    price: 10.2,
+    available: true,
+    input: {
+      hasHandle: true,
+      flowers: [
+        {
+          flower: "4238a9cb-a554-41c5-95c1-4ccbf92de3d8",
+          quantity: 15
+        }
+      ]
+    }
+  ) {
+    ...on ProductInterface {
+      _id,
+      name
+    }
+  }
+}
+---------------------------------
+{
+  allProducts {
+    ...on ProductInterface {
+      _id,
+      name,
+      updatedAt,
+      flowers {
+        flower {
+          name
+        },
+        quantity
+      }
+    }
+    ...on Basket {
+      hasHandle
+    }
+    ...on Bouquet {
+      hasRibbon
+    }
+  }
+}
+---------------------------------
+mutation {
+  updateProduct (
+    _id: "36e83afe-07d7-43ad-8757-139c48c8b1f9",
+    input: {
+      price: 112
+    }
+  ), {
+    ...on ProductInterface {
+      _id,
+      name,
+      price,
+      updatedAt
+    }
+  }
+}
+---------------------------------
+{
+  available_prods: products(input: {available: true}) {
+    ...on ProductInterface {
+      name
+    }
+  },
+  paged_prods: products(input: {resultsPerPage: 4, page: 1}) {
+    ...on ProductInterface {
+      name
+    }
+  }
+}
+---------------------------------
+{
+  product (
+    _id: "ff944004-10a8-47d3-8c29-1eb08f9184dc"),
+  {
+    ...on ProductInterface {
+      name
+    }
+  }
+}
+---------------------------------
+mutation {
+  deleteProduct (
+    _id: "ff944004-10a8-47d3-8c29-1eb08f9184dc")
+}
+---------------------------------
+---------------------------------
+---------------------------------
+---------------------------------

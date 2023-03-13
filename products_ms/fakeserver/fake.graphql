@@ -1,0 +1,150 @@
+scalar Datetime
+
+type Supplier {
+    _id: ID!
+    name: String!
+    email: String!
+    flowers: [Flower!]
+}
+
+enum MeasureUnit {
+    BUNCH
+    ITEM
+}
+
+type Stock {
+    quantity: Int!
+    unit: MeasureUnit!
+}
+
+type Flower {
+    _id: ID!
+    name: String!
+    stock: Stock!
+    products: [Product!]!
+    supplier: Supplier
+    description: String
+    updatedAt: Datetime!
+}
+
+type FlowersComponent {
+    flower: Flower!
+    quantity: Int!
+}
+
+enum Sizes {
+    SMALL
+    MEDIUM
+    BIG
+}
+
+interface ProductInterface {
+    _id: ID!
+    name: String!
+    price: Float!
+    size: Sizes
+    flowers: [FlowersComponent!]
+    available: Boolean!
+    updatedAt: Datetime!
+}
+
+type Bouquet implements ProductInterface {
+    _id: ID!
+    name: String!
+    price: Float!
+    size: Sizes
+    flowers: [FlowersComponent!]!
+    available: Boolean!
+    updatedAt: Datetime!
+    hasRibbon: Boolean!
+}
+
+type Basket implements ProductInterface {
+    _id: ID!
+    name: String!
+    price: Float!
+    size: Sizes
+    flowers: [FlowersComponent!]
+    available: Boolean!
+    updatedAt: Datetime!
+    hasHandle: Boolean!
+}
+
+union Product = Bouquet | Basket
+
+enum SortingOrder {
+    ASCENDING
+    DESCENDING
+}
+
+enum SortBy {
+    price
+    name
+}
+
+input ProductsFilter {
+    maxPrice: Float
+    minPrice: Float
+    available: Boolean=true
+    sortBy: SortBy=price
+    sort: SortingOrder=DESCENDING
+    resultsPerPage: Int = 10
+    page: Int = 1
+}
+
+type Query {
+    allSuppliers: [Supplier!]!
+    allProducts: [Product!]!
+    allFlowers: [Flower!]!
+    products(input: ProductsFilter!): [Product!]!
+    product(_id: ID!): Product
+    flower(_id: ID!): Flower
+}
+
+input FlowersComponentInput {
+    flower: ID!
+    quantity: Int!
+}
+
+input AddProductInput {
+    price: Float
+    size: Sizes
+    flowers: [FlowersComponentInput!]
+    available: Boolean = false
+    hasRibbon: Boolean = false
+    hasHandle: Boolean = false
+}
+
+input AddFlowerInput {
+    supplier: ID!
+    stock: AddStockInput
+    description: String
+}
+
+input AddStockInput {
+    quantity: Int!
+    unit: MeasureUnit!
+}
+
+input AddSupplierInput {
+    email: String!
+}
+
+enum ProductType {
+    bouquet
+    basket
+}
+
+type Mutation {
+    addSupplier(name: String!, input: AddSupplierInput!): Supplier!
+    addFlower(name: String!, input: AddFlowerInput!): Flower!
+    addProduct(name: String!, type: ProductType!, input: AddProductInput!): Product!
+    updateProduct(_id: ID!, input: AddProductInput!): Product!
+    deleteProduct(_id: ID!): Boolean!
+    updateStock(_id: ID!, changeAmount: AddStockInput): Flower!
+}
+
+schema {
+    query: Query,
+    mutation: Mutation
+}

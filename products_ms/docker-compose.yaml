@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  fakeserver:
+    image: apisguru/graphql-faker
+    container_name: graphql-fakeserver
+    command: "fake.graphql"
+    ports:
+      - "9002:9002"
+    volumes:
+      - ./fakeserver:/workdir
+
+  products-db:
+    image: mongo:6.0-jammy
+    container_name: products-db-mongo
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - products-ms-data:/data/db
+    env_file:
+      - ./env/mongo.env
+
+#  api:
+#    image: ilvi/flowersbasket-api:latest
+#    container_name: flowersbasket-api
+#    build: ./flowersbasket
+#    expose:
+#      - 8000
+#    ports:
+#      - "8000:80"
+#    volumes:
+#      - ./flowersbasket/web:/appdir/web
+##    command: bash -c "uvicorn app.main:app --reload --host 0.0.0.0 --port 80"
+#    env_file:
+#      - ./env/flowersbasket.env
+##    depends_on:
+##      - postgres
+##      - face
+
+volumes:
+  products-ms-data:
