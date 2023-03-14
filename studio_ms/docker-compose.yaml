@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+
+  studio-db:
+    image: "postgres:14-alpine"
+    container_name: studio-ms-db
+    ports:
+      - "54392:5432"
+    volumes:
+      - studio-ms-data:/var/lib/postgresql/data/
+    env_file:
+      - ./env/postgres.env
+
+volumes:
+  studio-ms-data:
