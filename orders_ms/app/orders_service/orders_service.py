@@ -1,3 +1,5 @@
+import json
+
 from sqlalchemy.orm import Session
 from uuid import UUID
 from typing import List
@@ -7,6 +9,7 @@ from app.orders_service.exceptions import (
     InvalidActionError,
     APIIntegrationError,
 )
+from app.orders_service.mq_producer import send_sync
 from app.repository.models import Order
 from app.repository.orders_repository import OrdersRepository
 from app.web.api.schemas import OrderItemSchema
@@ -56,25 +59,20 @@ class OrdersService:
         if order.status != "created":
             raise InvalidActionError(f"Order with ID {order_id} has already been paid")
 
+        # Send a message to Kafka
+        payload = json.dumps(
+            {"order_id": str(order_id), "items": [item.dict() for item in order.items]}
+        )
+        send_sync(payload)
+
+        return self.orders_repository.update(order_id, status="progress")
+
         # TODO: Integrate Payments
         # response = requests.post(
         #     'http://localhost:3001/payments', json={'order_id': self.id}
         # )
         # if response.status_code == 201:
         #     return
-        raise APIIntegrationError(
-            f"Could not process payment for Order with ID {order_id}"
-        )
-
-        # TODO: Integrate Scheduling
-        # response = requests.post(
-        #     'http://localhost:3000/studio/schedules',
-        #     json={'order': [item.dict() for item in self.items]}
+        # raise APIIntegrationError(
+        #     f"Could not process payment for Order with ID {order_id}"
         # )
-        # if response.status_code == 201:
-        #     schedule_id = response.json()['id']
-        raise APIIntegrationError(f"Could not schedule Order with ID {order_id}")
-
-        return self.orders_repository.update(
-            order_id, status="paid", schedule_id=schedule_id
-        )

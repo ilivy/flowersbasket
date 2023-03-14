@@ -24,6 +24,8 @@ class GlobalConfig(BaseSettings):
     TIMEZONE: str = "UTC"
 
     USERS_MS_URL = "http://users"
+    BOOTSTRAP_SERVERS = "localhost:9092"
+    MQ_ORDER_CREATED = "order_created"
 
     DATABASE_DSN: Optional[
         PostgresDsn

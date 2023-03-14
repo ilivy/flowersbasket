@@ -51,3 +51,10 @@ class OrderItem(Base):
             f"OrderItem(id={self.id!r}, order_id={self.order_id!r}, product={self.product!r},"
             f" size={self.size!r}, quantity={self.quantity!r})"
         )
+
+    def dict(self):
+        return {
+            "product": self.product,
+            "size": self.size,
+            "quantity": self.quantity,
+        }

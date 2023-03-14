@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  zookeeper:
+    image: docker.io/bitnami/zookeeper:3.8
+    container_name: kafka-zookeeper-ms
+    ports:
+      - "2181:2181"
+    volumes:
+      - "zookeeper_data:/bitnami"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - kafkantw
+
+  kafka:
+    image: docker.io/bitnami/kafka:3.4
+    container_name: kafka-ms
+    ports:
+      - "9092:9092"
+    volumes:
+      - "kafka_data:/bitnami"
+    env_file:
+      - ./env/kafka.env
+    depends_on:
+      - zookeeper
+    networks:
+      - kafkantw
+
+volumes:
+  zookeeper_data:
+  kafka_data:
+
+networks:
+  kafkantw:
