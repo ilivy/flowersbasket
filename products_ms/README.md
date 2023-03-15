@@ -5,7 +5,7 @@
 
 Serves "Products" Domain.
 
----
+## Implementation
 
 #### Stack:
 `Ariadne` `MongoDB` `Docker`
@@ -19,7 +19,15 @@ Serves "Products" Domain.
 - Flower
 - Supplier
 
----
+#### Environment variables templates:
+`env/` folder
+
+## Usage
+
+#### Run project:
+```console
+docker-compose up -d
+```
 
 #### API specification:
 `http://127.0.0.1:9002/voyager`
@@ -55,17 +63,4 @@ Serves "Products" Domain.
   }
 }
 ```
-
----
-#### Environment variables templates:
-`env/` folder
-
-#### Run project:
-```console
-docker-compose up -d
-```
-
-
-
-
 

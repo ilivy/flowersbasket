@@ -5,7 +5,7 @@
 
 Serves "Users" Domain.
 
----
+## Implementation
 
 #### Stack:
 `FastAPI` `PostreSQL` `Docker`
@@ -17,20 +17,10 @@ Serves "Users" Domain.
 #### Data Models:
 - User
 
----
-
-#### API specification:
-`127.0.0.1:8001/docs`
-
-#### Requesting JWT:
-`127.0.0.1:8001/v1/token/`
-
-expects  "form data" with "username" and "password"
-
----
-
 #### Environment variables templates:
 `env/` folder
+
+## Usage
 
 #### Run project:
 ```console
@@ -51,3 +41,11 @@ docker-compose exec users-api alembic revision --autogenerate -m "Updating db"
 ```console
 docker-compose exec users-api alembic upgrade head 
 ```
+
+#### API specification:
+`127.0.0.1:8001/docs`
+
+#### Requesting JWT:
+`127.0.0.1:8001/v1/token/`
+
+expects  "form data" with "username" and "password"

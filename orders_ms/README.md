@@ -5,7 +5,7 @@
 
 Serves "Orders" Domain.
 
----
+## Implementation
 
 #### Stack:
 `FastAPI` `PostreSQL` `Kafka` `Docker`
@@ -18,15 +18,10 @@ Serves "Orders" Domain.
 - Order
 - OrderItem
 
----
-
-#### API specification:
-`127.0.0.1:8003/docs`
-
----
-
 #### Environment variables templates:
 `env/` folder
+
+## Usage
 
 #### Run project:
 ```console
@@ -48,3 +43,5 @@ docker-compose exec orders-api alembic revision --autogenerate -m "Updating db"`
 docker-compose exec orders-api alembic upgrade head`
 ```
 
+#### API specification:
+`127.0.0.1:8003/docs`

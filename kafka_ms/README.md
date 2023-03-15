@@ -5,7 +5,7 @@ Runs `Apache Kafka` as a docker container.
 
 `Apache Kafka` is an efficient messaging real time system. 
 
----
+## Implementation
 
 #### Stack:
 `Apache Kafka` `Docker`
@@ -15,10 +15,10 @@ Runs `Apache Kafka` as a docker container.
 - provides test Producer and Consumer
 - topics are autocreated
 
----
-
 #### Environment variables templates:
 `env/` folder
+
+## Usage
 
 #### Run project:
 ```console

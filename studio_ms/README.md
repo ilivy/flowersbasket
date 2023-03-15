@@ -5,7 +5,7 @@
 
 Serves "Studio" Domain.
 
----
+## Implementation
 
 #### Stack:
 `Django` `PostreSQL` `Kafka` `Docker`
@@ -19,17 +19,15 @@ Serves "Studio" Domain.
 - OrderItem
 - KafkaError
 
----
-
-#### Admin panel:
-`127.0.0.1:8004/admin`
-
----
-
 #### Environment variables templates:
 `env/` folder
+
+## Usage
 
 #### Run project:
 ```console
 docker-compose up -d
 ```
+
+#### Web application:
+`127.0.0.1:8004/admin`
