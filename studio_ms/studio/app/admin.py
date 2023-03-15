@@ -1,8 +1,6 @@
 from django.contrib import admin
 from .models import Schedule, OrderItem, KafkaError
 
-admin.site.register(KafkaError)
-
 
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
@@ -17,3 +15,10 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [
         OrderItemInline,
     ]
+
+
+@admin.register(KafkaError)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ["key", "created_at"]
+    list_filter = ["created_at"]
+    ordering = ["created_at"]

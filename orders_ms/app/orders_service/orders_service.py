@@ -57,7 +57,7 @@ class OrdersService:
         if order is None:
             raise OrderNotFoundError(f"Order with ID {order_id} not found")
         if order.status != "created":
-            raise InvalidActionError(f"Order with ID {order_id} has already been paid")
+            raise InvalidActionError(f"Order with ID {order_id} is already in progress")
 
         # Send a message to Kafka
         payload = json.dumps(

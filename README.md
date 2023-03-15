@@ -2,8 +2,7 @@
 
 Codebase on [GitHub](https://github.com/ilivy/flowersbasket).
 
----
-### Implementation
+## Implementation
 
 The System decomposed into microservices using 
 **Domain Driven Design**, where every service:
@@ -13,8 +12,7 @@ The System decomposed into microservices using
 
 Services communicate through the real time Messaging System (Apache Kafka).
 
----
-### Microservices
+## Microservices
 
 * "Users" - Identity Provider (REST API) [README](https://github.com/ilivy/flowersbasket/blob/main/users_ms/README.md)
 * "Products" - Products management (GraphQL) [README](https://github.com/ilivy/flowersbasket/blob/main/products_ms/README.md)
@@ -22,10 +20,9 @@ Services communicate through the real time Messaging System (Apache Kafka).
 * "Studio" - Orders processing (Web Application) [README](https://github.com/ilivy/flowersbasket/blob/main/studio_ms/README.md)
 * "Kafka" - Runs Apache Kafka [README](https://github.com/ilivy/flowersbasket/blob/main/kafka_ms/README.md)
 
----
-#### Workflow example
+## Workflow example
 
-##### User registration
+#### User registration
 
 `127.0.0.1:8001/v1/register/`
 
@@ -33,7 +30,7 @@ POST request: "username", "email", "password", "password_confirm"
 
 <br/>
 
-##### Requesting JWT token
+#### Requesting JWT token
 
 `127.0.0.1:8001/v1/token/`
 
@@ -41,7 +38,7 @@ POST request with "form-data": "username", "password"
 
 <br/>
 
-##### Getting Products list
+#### Getting Products list
 
 `127.0.0.1:8002`
 
@@ -58,14 +55,14 @@ POST request
 
 <br/>
 
-##### Creating a new Order
+#### Creating a new Order
 `127.0.0.1:8003/v1/orders`
 
 POST request with Order Items (including Authorization header)
 
 <br/>
 
-##### Schedule the Order
+#### Schedule the Order
 `127.0.0.1:8003/v1/orders/<order_id>/pay`
 POST request (including Authorization header)
 

@@ -11,6 +11,46 @@ services:
       - studio-ms-data:/var/lib/postgresql/data/
     env_file:
       - ./env/postgres.env
+    networks:
+      - studiontw
+
+  studio-api:
+    build: .
+    container_name: studio-ms-api
+    volumes:
+      - ./studio/:/microservice/studio/
+    ports:
+      - 8004:8000
+    env_file:
+      - ./env/app.env
+    command: >
+      sh -c "python studio/manage.py wait_for_db
+      && python studio/manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - studio-db
+    networks:
+      - studiontw
+
+  studio-consumer:
+    build: .
+    container_name: studio-ms-consumer
+    env_file:
+      - ./env/app.env
+    command: >
+      sh -c "python studio/manage.py wait_for_db
+      && python studio/kafka_consumer.py"
+    depends_on:
+      - studio-db
+    networks:
+      - studiontw
+      - kafkantw
+
+
+networks:
+  studiontw:
+  kafkantw:
+    external:
+      name: kafkantw
 
 volumes:
   studio-ms-data:

@@ -29,12 +29,16 @@ services:
     networks:
       - orders
       - users
+      - kafkantw
 
 networks:
   orders:
   users:
     external:
       name: users
+  kafkantw:
+    external:
+      name: kafkantw
 
 volumes:
   orders-ms-data:
