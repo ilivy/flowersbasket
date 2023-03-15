@@ -1,24 +1,39 @@
 ## "Kafka" microservice
+*A part of "Flowers Basket" project.*
 
-A part of "Flowers Basket" project.
-Runs Apache Kafka as a docker container.
+Runs `Apache Kafka` as a docker container.
 
-Topics are autocreated.
+`Apache Kafka` is an efficient messaging real time system. 
 
-Docker external network `kafkantw` can be used in other networks for communication with Kafka.
+---
 
-Service `kafka:9092`
+#### Stack:
+`Apache Kafka` `Docker`
 
-### Run project
-`docker-compose up -d`
+#### Main functionality:
+- runs `Apache Kafka`
+- provides test Producer and Consumer
+- topics are autocreated
 
-### Inspect 'order_created' topics
-`docker exec -ti kafka-ms /bin/bash`
+---
+
+#### Environment variables templates:
+`env/` folder
+
+#### Run project:
+```console
+docker-compose up -d
+```
+
+#### Inspect 'order_created' topic:
+```console
+docker exec -ti kafka-ms /bin/bash
+```
 ```console
 /opt/bitnami/kafka/bin/kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic order_created
 ```
 
-### Test Consumer
+#### Test Consumer:
 ```console
 pipenv install
 pipenv shell
