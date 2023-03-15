@@ -35,12 +35,12 @@ docker-compose exec -e ENVIRONMENT=test orders-api pytest
 
 #### Generate migrations:
 ```console
-docker-compose exec orders-api alembic revision --autogenerate -m "Updating db"`
+docker-compose exec orders-api alembic revision --autogenerate -m "Updating db"
 ```
 
 #### Run migrations:
 ```console
-docker-compose exec orders-api alembic upgrade head`
+docker-compose exec orders-api alembic upgrade head
 ```
 
 #### API specification:
