@@ -1,10 +1,10 @@
-## "Flowers Basket" - Microservice Architecture demo project.
+## "Flowers Basket" - Skeleton of a Products selling application with microservice architecture.
 
 Codebase on [GitHub](https://github.com/ilivy/flowersbasket).
 
 ## Implementation
 
-The System decomposed into microservices using 
+The System is decomposed into microservices using 
 **Domain Driven Design**, where each service:
 - serves clearly differentiated area of logic
 - has no strong dependencies towards other services
