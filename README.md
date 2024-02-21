@@ -75,3 +75,6 @@ POST request (including Authorization header)
 
 #### Scheduled Orders management
 `127.0.0.1:8004/admin`
+
+
+![alt text](https://github.com/ilivy/flowersbasket/blob/main/sequence-diagram.jpg?raw=true)
