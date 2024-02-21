@@ -12,6 +12,8 @@ The System is decomposed into microservices using
 
 Services communicate through the real time Messaging System (Apache Kafka).
 
+![alt text](https://github.com/ilivy/flowersbasket/blob/main/project_design.jpg?raw=true)
+
 ## Microservices
 
 * "Users" - Identity Provider (REST API: `FastAPI` `PostreSQL`) [README](https://github.com/ilivy/flowersbasket/blob/main/users_ms/README.md)
@@ -21,10 +23,9 @@ Services communicate through the real time Messaging System (Apache Kafka).
 * "Kafka" - Runs `Apache Kafka` [README](https://github.com/ilivy/flowersbasket/blob/main/kafka_ms/README.md)
 
 
-![alt text](https://github.com/ilivy/flowersbasket/blob/main/project_design.jpg?raw=true)
-
-
 ## Workflow example
+
+![alt text](https://github.com/ilivy/flowersbasket/blob/main/sequence-diagram.jpg?raw=true)
 
 #### User registration
 
@@ -76,5 +77,3 @@ POST request (including Authorization header)
 #### Scheduled Orders management
 `127.0.0.1:8004/admin`
 
-
-![alt text](https://github.com/ilivy/flowersbasket/blob/main/sequence-diagram.jpg?raw=true)
