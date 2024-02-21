@@ -20,6 +20,10 @@ Services communicate through the real time Messaging System (Apache Kafka).
 * "Studio" - Orders processing (Web Application: `Django` `PostreSQL`) [README](https://github.com/ilivy/flowersbasket/blob/main/studio_ms/README.md)
 * "Kafka" - Runs `Apache Kafka` [README](https://github.com/ilivy/flowersbasket/blob/main/kafka_ms/README.md)
 
+
+![alt text](https://github.com/ilivy/flowersbasket/blob/main/project_design.jpg?raw=true)
+
+
 ## Workflow example
 
 #### User registration
